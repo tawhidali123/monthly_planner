@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title> Daily Expense Planner</title>
+</head>
+
+<body class="text-center">
+  
+  <!-- jumbotron -->
+  <div class="jumbotron mt-3">
+    <h1 class="display-4">Expense Planner</h1>
+    <p class="lead">This is a simple money managing tool to help users see how much <strong>INCOME</strong> they bring in, and compare it to how much they spend on <strong>EXPENSES</strong></p>
+    <hr class="my-4">
+    <p>Look at some examples people previously entered</p>
+   
+    <div class="container examples hide">
+
+      <!-- cards go here -->
+
+    </div>
+
+    <a class="btn btn-primary btn-lg allItems" href="#" role="button">View</a>
+  </div>
+
+
+  <div class="container">
+
+    <form class="send">
+
+      <div class="row">
+        <div class="col">
+          <h3>Yearly Income</h3>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter Name">
+          </div>
+          <div class="form-group">
+            <label for="yearlySalary">How Much do you make a Year?</label>
+            <input type="number" class="form-control yrSalary" id="yearlySalary" placeholder="Yearly Salary">
+            <small id="emailHelp" class="form-text text-muted">We will Transform this into Monthly, Weekly, and Daily Cash you have Available</small>
+          </div> 
+        </div>
+
+        <div class="col">
+          <h3>Expenses</h3>
+          <div class="form-group">
+            <label for="foodExpense">How much do you spend on <strong>FOOD</strong> in a <strong>DAILY</strong> Basis</label>
+            <input type="number" class="form-control foodExpense" id="foodExpense" placeholder="Enter Amount">
+          </div>
+          <div class="form-group">
+            <label for="travelExpense">How much do you spend on <strong>TRAVEL</strong> in a <strong>MONTHLY</strong> Basis</label>
+            <input type="number" class="form-control travelExpense" id="travelExpense" placeholder="Enter Amount">
+          </div>
+          <div class="form-group">
+            <label for="other">What are your <strong>OTHER EXPENSES</strong> in a <strong>MONTHLY</strong> Basis</label>
+            <input type="number" class="form-control otherExpense" id="other" placeholder="Enter Amount">
+            <small id="emailHelp" class="form-text text-muted">Other Expenses include total amount for credit card payments, Insurance, Rent, etc.</small>
+          </div> 
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form> 
+
+    <br>
+    <button class="btn btn-primary delete">Delete an Instance you created</button>
+
+    <div class="hide">
+      <!-- which one would you like to delete -->
+    </div>
+
+
+  </div>
+
+
+    
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+  <script src="./myScript.js"></script>
+</body>
+</html>
