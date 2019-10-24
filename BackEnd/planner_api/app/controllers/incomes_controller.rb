@@ -23,7 +23,12 @@ class IncomesController < ApplicationController
 
     def update 
         @income = Income.find(params[:id])
-        @income.update(income_params)
+        @income.update(params.require("income").permit(:name, :yearly, :monthly, :weekly, :daily))
+
+        params[:expense].each do |expenseParam|
+            expense = @income.expenses.find_by(category: expenseParam[:category])
+            expense.update(expenseParam.permit(:amount))
+        end
     end
 
     def destroy
