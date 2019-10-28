@@ -9,7 +9,7 @@
     background: #fff;
     border-radius: 2px;
     display: inline-block;
-    height: 300px;
+    height: 335px;
     margin: 1rem;
     position: relative;
     width: 300px;
@@ -51,16 +51,19 @@
   .button {
     font-size: 1em;
     padding: 10px;
-    color: #fff;
+    color: #007bff;
     border: 2px solid rgb(65, 179, 231);
-    border-radius: 20px/50px;
+    border-radius: .25rem;
     text-decoration: none;
+    text-align: center;
     cursor: pointer;
     transition: all 0.3s ease-out;
   }
+
   .button:hover {
-    background: #06D85F;
-    color: black;
+    transition: all 0.3s ease-out;
+    background: #007bff;
+    color: white;
     text-decoration: none;
   }
   

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css" integrity="sha256-a2tobsqlbgLsWs7ZVUGgP5IvWZsx8bTNQpzsqCSm5mk=" crossorigin="anonymous" />
+
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css"> -->
 
     <link rel="stylesheet" href="style.css">
 
@@ -15,7 +20,7 @@
 <body class="text-center">
   
   <!-- jumbotron -->
-  <div class="jumbotron mt-3">
+  <div class="jumbotron mt-3 animated fadeInDown">
     <h1 class="display-4">Expense Planner</h1>
     <p class="lead">This is a simple money managing tool to help users see how much <strong>INCOME</strong> they bring in, and compare it to how much they spend on <strong>EXPENSES</strong></p>
     <hr class="my-4">
@@ -32,7 +37,7 @@
   </div>
 
 
-  <div class="container">
+  <div class="container animated fadeInUpBig">
 
     <form class="send">
 
@@ -72,12 +77,6 @@
     </form> 
 
     <br>
-    <!-- <button class="btn btn-primary delete">Delete an Instance you created</button> -->
-
-    <div class="hide">
-      <!-- which one would you like to delete -->
-    </div>
-
 
   </div>
 
@@ -93,12 +92,63 @@
   </div>
 
 
-    
+  <!-- Calculate Modal -->
+  <!-- <div id="animatedModal"> -->
+      <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID  class="close-animatedModal" -->
+      <!-- <div class="close-animatedModal"> 
+          CLOSE MODAL
+      </div> -->
+          
+      <!-- <div class="modal-content"> -->
+                <!--Your modal content goes here-->
+      <!-- </div> -->
+  <!-- </div> -->
+
+
   
+<!-- 
+  <div id="animatedModal" class="animated animatedModal-off bounceOut" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(57, 190, 185); overflow-y: auto; z-index: -9999; opacity: 1; animation-duration: 0.6s;">
+            
+      <div id="closebt-container" class="close-animatedModal">
+          <img class="closebt" src="img/closebt.svg">
+      </div>
+
+      <div id="modal-content" class="col-sm-8 col-md-8 col-lg-8 col-lg-offset-2">
+
+          <div class="thumb col-lg-4" style="opacity: 1; display: none; transform: scaleX(1) scaleY(1); transform-origin: 50% 50% 0px;">
+              <img src="img/thumbnail.svg">
+          </div>
+
+          <div class="thumb col-lg-4" style="opacity: 1; display: none; transform: scaleX(1) scaleY(1); transform-origin: 50% 50% 0px;">
+              <img src="img/thumbnail.svg">
+          </div>
+
+          <div class="thumb col-lg-4" style="opacity: 1; display: none; transform: scaleX(1) scaleY(1); transform-origin: 50% 50% 0px;">
+              <img src="img/thumbnail.svg">
+          </div>
+     </div>
+
+  </div> -->
+
+
+
+
+  
+
+
+
+
+    
+  <!-- BOOTSTRAP -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-  <script src="./myScript.js"></script>
+  <!-- ANIMATE JS -->
+
+  <script src="./animatedModal.js-master/animatedModal.min.js"></script>
+  <script src="./animatedModal.js-master/animatedModal.js"></script>
+
+  <script defer src="./myScript.js"></script>
 </body>
 </html>
