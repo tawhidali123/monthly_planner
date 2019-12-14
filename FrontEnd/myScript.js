@@ -25,7 +25,7 @@ viewSelector.addEventListener("click", () => {
 
 
 // display all users who used their income and expenses as examples
-fetch("http://localhost:3000/incomes")
+fetch("https://sleepy-meadow-20552.herokuapp.com/incomes")
 .then(r => r.json())
 .then(res => {
     // console.log(res)
@@ -90,7 +90,7 @@ backEnd.addEventListener("submit", (evt) => {
 
 
     // POST fetch INCOME && EXPENSES
-    fetch("http://localhost:3000/incomes", {
+    fetch("https://sleepy-meadow-20552.herokuapp.com/incomes", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ let updateCard = () => {
 
             editModal.classList.add("overlay")
 
-            fetch(`http://localhost:3000/incomes/${id}`)
+            fetch(`https://sleepy-meadow-20552.herokuapp.com/incomes/${id}`)
             .then(r => r.json())
             .then(res => {
                 // console.log(res)
@@ -192,7 +192,7 @@ let updateCard = () => {
                     ]
 
 
-                    fetch(`http://localhost:3000/incomes/${id}`, {
+                    fetch(`https://sleepy-meadow-20552.herokuapp.com/incomes/${id}`, {
                         method: "PATCH",
                         headers: {
                             'Content-Type': 'application/json',
