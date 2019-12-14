@@ -12,8 +12,8 @@ let backEnd = document.querySelector(".send");
 // MODAL
 let editModal = document.querySelector("#popup1");
 
-// console.log(backEnd)
-
+// Calculate Modal
+let calcModal = document.getElementById("calculateModal");
 
 
 // TOGGLE class to show and hide  all examples
@@ -24,8 +24,8 @@ viewSelector.addEventListener("click", () => {
 
 
 
-// display all users who chose to use their income and expenses as examples
-fetch("http://localhost:3000/incomes")
+// display all users who used their income and expenses as examples
+fetch("https://sleepy-meadow-20552.herokuapp.com/incomes")
 .then(r => r.json())
 .then(res => {
     // console.log(res)
@@ -38,36 +38,7 @@ fetch("http://localhost:3000/incomes")
 
     }
     updateCard();
-
-    let calcButtons = document.querySelectorAll(".calculate");
-
-    for (const calcButton of calcButtons) {
-        // console.log(calcButton)
-        calcButton.addEventListener("click", (evt) => {
-            let calcBox = evt.target.parentElement.parentElement.parentElement;
-            // console.log(calcBox);
-
-            let dailyFoodAmount = calcBox.querySelector(".fAmount");
-            let monthlyTravelAmount = calcBox.querySelector(".tAmount");
-            let monthlyOtherAmount = calcBox.querySelector(".othAmount");
-            // console.log(dailyFoodAmount)
-        
-            
-            let foodNumberInside = parseInt(dailyFoodAmount.innerText.slice(9));
-            let travelNumberInside = parseInt(monthlyTravelAmount.innerText.slice(9));
-            let otherNumberInside = parseInt(monthlyOtherAmount.innerText.slice(9));
-            // console.log(numberInside)
-
-            let convertedFoodExpenses = dailyFood(foodNumberInside);
-            let convertedTravelExpenses = monthlyTravel(travelNumberInside);
-            let convertedOtherExpenses = monthlyOther(otherNumberInside);
-            console.log(convertedFoodExpenses)
-            console.log(convertedTravelExpenses)
-            console.log(convertedOtherExpenses)
-            
-        })
-    }
-
+    calculateButton()
 
 
 
@@ -119,7 +90,7 @@ backEnd.addEventListener("submit", (evt) => {
 
 
     // POST fetch INCOME && EXPENSES
-    fetch("http://localhost:3000/incomes", {
+    fetch("https://sleepy-meadow-20552.herokuapp.com/incomes", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -137,13 +108,14 @@ backEnd.addEventListener("submit", (evt) => {
          cardMaker(res);
          // make another edit event listener for newly made card
          updateCard();
-        // debugger
 
         let refreshForm  = selectedForm.firstElementChild.firstElementChild
 
         emptyForm(refreshForm)
 
         console.log(backEnd)
+
+        calculateButton()
 
     })
 
@@ -172,7 +144,7 @@ let updateCard = () => {
 
             editModal.classList.add("overlay")
 
-            fetch(`http://localhost:3000/incomes/${id}`)
+            fetch(`https://sleepy-meadow-20552.herokuapp.com/incomes/${id}`)
             .then(r => r.json())
             .then(res => {
                 // console.log(res)
@@ -197,14 +169,12 @@ let updateCard = () => {
                     
 
                     let incomeObject = calculate(yrSalary.value, name.value);
-                    // console.log(name.value, yrSalary.value);
 
 
                     // select EXPENSE Edit
                     let foodExpense = document.querySelector(".foodExpenseEdit");
                     let travelExpense = document.querySelector(".travelExpenseEdit");
                     let otherExpense = document.querySelector(".otherExpenseEdit");
-                    // console.log(foodExpense.value, travelExpense.value, otherExpense.value);
 
                     let allExpenses = [
                         {
@@ -222,7 +192,7 @@ let updateCard = () => {
                     ]
 
 
-                    fetch(`http://localhost:3000/incomes/${id}`, {
+                    fetch(`https://sleepy-meadow-20552.herokuapp.com/incomes/${id}`, {
                         method: "PATCH",
                         headers: {
                             'Content-Type': 'application/json',
@@ -268,11 +238,51 @@ let updateCard = () => {
                                 <div class="row">
                                     <div class="col">
                                         <a class="button" href="#popup1">Edit</a>
-                                        <button type="button" class="btn btn-outline-success calculate">Calculate</button>
+                                        <button type="button" class="btn btn-outline-success updated" data-toggle="modal" data-target="#calculateModal">
+                                            Calculate
+                                        </button>
+
                                     </div>
                                 </div> 
                         `;
+                        
+                        // calculateButton()
+                        // cardSelector.addEventListener("click", (evt) => {
+                        //     console.log(evt.target.parentElement.parentElement.parentElement)
+                        // })
+                        let updatedCalculations = document.querySelectorAll('.updated')
 
+                        for (const updateCalc of updatedCalculations) {
+                            // console.log(calcButton)
+                            updateCalc.addEventListener("click", (evt) => {
+                                let calcBox = evt.target.parentElement.parentElement.parentElement;
+                                // console.log(calcBox);
+                    
+                                let dailyFoodAmount = calcBox.querySelector(".fAmount");
+                                let monthlyTravelAmount = calcBox.querySelector(".tAmount");
+                                let monthlyOtherAmount = calcBox.querySelector(".othAmount");
+                                // console.log(dailyFoodAmount)
+                            
+                                
+                                let foodNumberInside = parseInt(dailyFoodAmount.innerText.slice(8));
+                                let travelNumberInside = parseInt(monthlyTravelAmount.innerText.slice(8));
+                                let otherNumberInside = parseInt(monthlyOtherAmount.innerText.slice(8));
+                                // console.log(numberInside)
+                    
+                                let convertedFoodExpenses = dailyFood(foodNumberInside);
+                                let convertedTravelExpenses = monthlyTravel(travelNumberInside);
+                                let convertedOtherExpenses = monthlyOther(otherNumberInside);
+                                // console.log(convertedFoodExpenses)
+                                // console.log(convertedTravelExpenses)
+                                // console.log(convertedOtherExpenses)
+                    
+                                createCalcModal(convertedFoodExpenses, convertedTravelExpenses, convertedOtherExpenses)
+                               
+                                
+                            }) 
+                    
+                        }
+                        
                         
                     })
                     
@@ -281,12 +291,58 @@ let updateCard = () => {
 
             })
 
-
         })
+
+        
     }
 
 
 }
+
+
+
+
+
+let calculateButton = () => {
+    let calcButtons = document.querySelectorAll(".calculate");
+ 
+
+    for (const calcButton of calcButtons) {
+        // console.log(calcButton)
+        calcButton.addEventListener("click", (evt) => {
+            let calcBox = evt.target.parentElement.parentElement.parentElement;
+            // console.log(calcBox);
+
+            let dailyFoodAmount = calcBox.querySelector(".fAmount");
+            let monthlyTravelAmount = calcBox.querySelector(".tAmount");
+            let monthlyOtherAmount = calcBox.querySelector(".othAmount");
+            // console.log(dailyFoodAmount)
+        
+            
+            let foodNumberInside = parseInt(dailyFoodAmount.innerText.slice(9));
+            let travelNumberInside = parseInt(monthlyTravelAmount.innerText.slice(9));
+            let otherNumberInside = parseInt(monthlyOtherAmount.innerText.slice(9));
+            // console.log(numberInside)
+
+            let convertedFoodExpenses = dailyFood(foodNumberInside);
+            let convertedTravelExpenses = monthlyTravel(travelNumberInside);
+            let convertedOtherExpenses = monthlyOther(otherNumberInside);
+            // console.log(convertedFoodExpenses)
+            // console.log(convertedTravelExpenses)
+            // console.log(convertedOtherExpenses)
+
+            createCalcModal(convertedFoodExpenses, convertedTravelExpenses, convertedOtherExpenses)
+           
+            
+        }) 
+
+    }
+
+
+}
+
+
+
 
 
 
@@ -381,7 +437,10 @@ let cardMaker = (jsonRes) => {
             <div class="btn-group">
                 <div class="col">
                     <a class="button" href="#popup1">Edit</a>
-                    <button type="button" class="btn btn-outline-success calculate">Calculate</button>
+                    
+                    <button type="button" class="btn btn-outline-success calculate" data-toggle="modal" data-target="#calculateModal">
+                        Calculate
+                    </button>
                 </div>
             </div>
         </div>
@@ -452,7 +511,57 @@ let createEditForm = (jsonRes) => {
 
 
 
+// Calculation Modal
+let createCalcModal = (convertedFoodExpenses, convertedTravelExpenses, convertedOtherExpenses) => {
+    calcModal.innerHTML = `
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deeper Insight into Expenses</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <h2>Food Expense BreakDown</h2>
+                                <ul>
+                                    <li>Daily Food: $${convertedFoodExpenses.daily}</li>
+                                    <li>Weekly Food: $${convertedFoodExpenses.weeklyAmount}</li>
+                                    <li>Monthly Food: $${convertedFoodExpenses.monthlyAmount}</li>
+                                    <li>Yearly Food: $${convertedFoodExpenses.yearlyAmount}</li>
+                                </ul>
+                        </div>  
 
+                        <div>
+                            <h2>Travel Expense BreakDown</h2>
+                                <ul>
+                                    <li>Daily Travel: $${convertedTravelExpenses.dailyAmount}</li>
+                                    <li>Weekly Travel: $${convertedTravelExpenses.weeklyAmount}</li>
+                                    <li>Monthly Travel: $${convertedTravelExpenses.monthly}</li>
+                                    <li>Yearly Travel: $${convertedTravelExpenses.yearlyAmount}</li>
+                                </ul>
+                        </div> 
+
+                        <div>
+                            <h2>Other Expense BreakDown</h2>
+                                <ul>
+                                    <li>Daily Other: $${convertedOtherExpenses.dailyAmount}</li>
+                                    <li>Weekly Other: $${convertedOtherExpenses.weeklyAmount}</li>
+                                    <li>Monthly Other: $${convertedOtherExpenses.monthly}</li>
+                                    <li>Yearly Other: $${convertedOtherExpenses.yearlyAmount}</li>
+                                </ul>
+                        </div>    
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+                </div>
+            `
+}
 
 
 
